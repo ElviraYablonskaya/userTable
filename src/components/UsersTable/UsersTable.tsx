@@ -18,14 +18,14 @@ const UsersTable: React.FC = () => {
 
   return (
     <div className="container mx-auto p-4">
-      <h1 className="flex justify-center text-2xl font-bold mb-4 mt-4">User Management Table</h1>
+      <h1 className="text-center text-2xl font-bold mb-4 mt-4">User Management Table</h1>
       <div className='flex justify-center mb-5'>
         {loading ? <Loader /> : null}
       </div>
       <table className="min-w-full table-auto bg-white shadow-md rounded-lg">
         <thead>
           <tr className="bg-cyan-600">
-            <th className="px-4 py-2 w-1/4v text-white">
+            <th className="px-4 py-2 w-1/4 text-white border border-gray-300">
               Name
               <input
                 type="text"
@@ -36,7 +36,7 @@ const UsersTable: React.FC = () => {
                 placeholder="Filter by name"
               />
             </th>
-            <th className="px-4 py-2 w-1/4 text-white">
+            <th className="px-4 py-2 w-1/4 text-white border border-gray-300">
               Username
               <input
                 type="text"
@@ -47,7 +47,7 @@ const UsersTable: React.FC = () => {
                 placeholder="Filter by username"
               />
             </th>
-            <th className="px-4 py-2 w-1/4 text-white">
+            <th className="px-4 py-2 w-1/4 text-white border border-gray-300">
               Email
               <input
                 type="text"
@@ -58,7 +58,7 @@ const UsersTable: React.FC = () => {
                 placeholder="Filter by email"
               />
             </th>
-            <th className="px-4 py-2 w-1/4 text-white">
+            <th className="px-4 py-2 w-1/4 text-white border border-gray-300">
               Phone
               <input
                 type="text"
