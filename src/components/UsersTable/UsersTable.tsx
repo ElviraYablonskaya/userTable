@@ -1,11 +1,11 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchUsersRequest, setFilters } from '../../redux/reducers/userSlice';
-import { RootState } from '../../redux/store';
+import { UserSelector, fetchUsersRequest, setFilters } from '../../redux/reducers/userSlice';
+import Loader from '../Loader/Loader';
 
 const UsersTable: React.FC = () => {
   const dispatch = useDispatch();
-  const { filteredUsers, loading, filters } = useSelector((state: RootState) => state.users);
+  const { filteredUsers, loading, filters } = useSelector(UserSelector.getAllUsers);
 
   useEffect(() => {
     dispatch(fetchUsersRequest());
@@ -17,61 +17,75 @@ const UsersTable: React.FC = () => {
   };
 
   return (
-    <div>
-      <h1>User Management Table</h1>
-
-      {loading ? <p>Loading...</p> : null}
-
-      <table>
+    <div className="container mx-auto p-4">
+      <h1 className="flex justify-center text-2xl font-bold mb-4 mt-4">User Management Table</h1>
+      <div className='flex justify-center mb-5'>
+        {loading ? <Loader /> : null}
+      </div>
+      <table className="min-w-full table-auto bg-white shadow-md rounded-lg">
         <thead>
-          <tr>
-            <th>
+          <tr className="bg-cyan-600">
+            <th className="px-4 py-2 w-1/4v text-white">
               Name
               <input
                 type="text"
                 name="name"
                 value={filters.name}
                 onChange={handleFilterChange}
+                className="text-gray-700 mt-2 block w-full border border-gray-300 rounded-md p-1 font-normal hover:bg-slate-50 focus:outline-none"
+                placeholder="Filter by name"
               />
             </th>
-            <th>
+            <th className="px-4 py-2 w-1/4 text-white">
               Username
               <input
                 type="text"
                 name="username"
                 value={filters.username}
                 onChange={handleFilterChange}
+                className="text-gray-700 mt-2 block w-full border border-gray-300 rounded-md p-1 font-normal hover:bg-slate-50 focus:outline-none"
+                placeholder="Filter by username"
               />
             </th>
-            <th>
+            <th className="px-4 py-2 w-1/4 text-white">
               Email
               <input
                 type="text"
                 name="email"
                 value={filters.email}
                 onChange={handleFilterChange}
+                className="text-gray-700 mt-2 block w-full border border-gray-300 rounded-md p-1 font-normal hover:bg-slate-50 focus:outline-none"
+                placeholder="Filter by email"
               />
             </th>
-            <th>
+            <th className="px-4 py-2 w-1/4 text-white">
               Phone
               <input
                 type="text"
                 name="phone"
                 value={filters.phone}
                 onChange={handleFilterChange}
+                className="text-gray-700 mt-2 block w-full border border-gray-300 rounded-md p-1 font-normal hover:bg-slate-50 focus:outline-none"
+                placeholder="Filter by phone"
               />
             </th>
           </tr>
         </thead>
         <tbody>
-          {filteredUsers.map(user => (
-            <tr key={user.id}>
-              <td>{user.name}</td>
-              <td>{user.username}</td>
-              <td>{user.email}</td>
-              <td>{user.phone}</td>
+          {filteredUsers.length > 0 ? (
+            filteredUsers.map((user) => (
+              <tr key={user.id} className="border-t border-gray-200 hover:bg-slate-50">
+                <td className="px-4 py-2 h-12">{user.name}</td>
+                <td className="px-4 py-2 h-12">{user.username}</td>
+                <td className="px-4 py-2 h-12">{user.email}</td>
+                <td className="px-4 py-2 h-12">{user.phone}</td>
+              </tr>
+            ))
+          ) : (
+            <tr>
+              <td colSpan={4} className="text-center py-4">No users found</td>
             </tr>
-          ))}
+          )}
         </tbody>
       </table>
     </div>

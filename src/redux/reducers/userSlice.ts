@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { User } from '../../@types';
-
+import { RootState } from '../store';
 
 interface UsersState {
     users: User[];
@@ -62,5 +62,9 @@ export const {
     fetchUsersFailure,
     setFilters,
 } = usersSlice.actions;
+
+export const UserSelector = {
+    getAllUsers: (state: RootState) => state.users
+};
 
 export default usersSlice.reducer;
